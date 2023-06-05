@@ -1,0 +1,55 @@
+CREATE DATABASE TicTacToe;
+USE TicTacToe;
+
+-- Create table for Player
+CREATE TABLE player(
+    player_id INT NOT NULL,
+    player_username VARCHAR(255) NOT NULL,
+    player_win_count INT NOT NULL,
+    player_lose_count INT NOT NULL,
+    player_play_time TIME NOT NULL,
+    PRIMARY KEY (player_id)
+);
+
+-- create table for difficulty
+CREATE TABLE difficulty(
+    difficulty_id INT NOT NULL,
+    difficult_mode VARCHAR(255) NOT NULL,
+    PRIMARY KEY (difficulty_id)
+);
+
+-- create table for board
+CREATE TABLE board(
+    board_id INT NOT NULL,
+    board_size INT NOT NULL,
+    board_size_name VARCHAR(255) NOT NULL,
+    PRIMARY KEY (board_id)
+);
+
+-- Create table for settings
+CREATE TABLE setting(
+    setting_id INT NOT NULL AUTO_INCREMENT,
+    player_id INT NOT NULL,
+    board_id INT NOT NULL,
+    difficulty_id INT NOT NULL,
+    gamemode INT NOT NULL,
+    setting_background_music BOOLEAN NOT NULL,
+    setting_show_timer BOOLEAN NOT NULL,
+    setting_show_board_info BOOLEAN NOT NULL,
+    setting_show_player_win_count BOOLEAN NOT NULL,
+    PRIMARY KEY (setting_id),
+    FOREIGN KEY (player_id) REFERENCES player(player_id),
+    FOREIGN KEY (board_id) REFERENCES board(board_id),
+    FOREIGN KEY (difficulty_id) REFERENCES difficulty(difficulty_id)
+);
+
+CREATE TABLE player_match(
+    match_id INT NOT NULL AUTO_INCREMENT,
+    board_id INT NOT NULL,
+    player_id INT NOT NULL,
+    match_win_count INT NOT NULL,
+    match_lose_count INT NOT NULL,
+    PRIMARY KEY (match_id),
+    FOREIGN KEY (player_id) REFERENCES player(player_id),
+    FOREIGN KEY (board_id) REFERENCES board(board_id)
+);
