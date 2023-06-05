@@ -151,7 +151,6 @@ public class StateBoard extends JPanel implements ActionListener{
 						+ "WHERE player_id =" + TicTacToe.playerId + " AND board_id = " + TicTacToe.board + ";";
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(sql);
-				System.out.println("yes" + TicTacToe.board);
 				if(!rs.next()) {
 					match = 0;
 					player = 0;

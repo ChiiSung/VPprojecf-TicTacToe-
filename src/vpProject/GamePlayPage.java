@@ -24,6 +24,7 @@ public class GamePlayPage extends JPanel{
 				SoundEffect.buttonSound();
 				setVisible(false);
 				removeAll();
+				board.winningFrame.dispose();
 				TicTacToe.frame.setSize(330,394);
 				TicTacToe.main.setVisible(true);
 				TicTacToe.frame.repaint();
@@ -41,6 +42,7 @@ public class GamePlayPage extends JPanel{
 				SoundEffect.buttonSound();
 				setVisible(false);
 				removeAll();
+				board.winningFrame.dispose();
 				TicTacToe.frame.setSize(330,394);
 				TicTacToe.main.setVisible(true);
 				TicTacToe.frame.repaint();

@@ -9,12 +9,13 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class SoundEffect {
+public class SoundEffect extends Thread{
+	static Clip clip = null;
 	
     public static void buttonSound() {
     	final String pathToClip = "bgm/buttonSound.wav";
         boolean soundLoaded;
-        Clip clip = null;
+        
 	    try {
 	       File file1 = new File(pathToClip);
 	       AudioInputStream audioIn = AudioSystem.getAudioInputStream(file1);
@@ -38,9 +39,9 @@ public class SoundEffect {
     }
     
     public static void winSound() {
-    	final String pathToClip = "bgm/Rick Astley - Never Gonna Give You Up (Official Music Video).wav";
+    	final String pathToClip = "bgm/StageWin.wav";
         boolean soundLoaded;
-        Clip clip = null;
+        
 	    try {
 	       File file1 = new File(pathToClip);
 	       AudioInputStream audioIn = AudioSystem.getAudioInputStream(file1);
@@ -61,9 +62,10 @@ public class SoundEffect {
 	    if(soundLoaded) {
 	    	clip.start();
 		}
-	    
-	    clip.close();
     }
 	
+    public static void stopBgm() {
+    	clip.stop();
+    }
 
 }
