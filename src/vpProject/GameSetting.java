@@ -198,7 +198,7 @@ public class GameSetting extends JPanel{
 		playerCounterLb.setBounds(10, 10, 163, 46);
 		playerCounterPl.add(playerCounterLb);
 		
-		playerCounterDesc = new JLabel("Amount of people and bots playing");
+		playerCounterDesc = new JLabel("Display number of human/bots wins");
 		playerCounterDesc.setFont(new Font("Times New Romen", Font.PLAIN, 11));
 		playerCounterDesc.setBounds(40, 27, 200, 46);
 		playerCounterPl.add(playerCounterDesc);

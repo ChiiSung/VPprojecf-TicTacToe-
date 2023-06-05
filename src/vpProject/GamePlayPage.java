@@ -10,15 +10,16 @@ public class GamePlayPage extends JPanel{
 	JPanel footer;
 	static JButton playAgainBt, tryAgainBt;
 	JButton exitBt;
+	ImageIcon resetIcon = IconClass.createIcon("icon/restart.png",25,25);
 	
 	GamePlayPage(){
 		initialize();
 		footer = new JPanel();
 		
 		playAgainBt = new JButton("Play Again");
-		playAgainBt.setIcon(null);
+		playAgainBt.setIcon(resetIcon);
 		playAgainBt.setVisible(false);
-		playAgainBt.setPreferredSize(new Dimension(100,40));
+		playAgainBt.setPreferredSize(new Dimension(125,40));
 		playAgainBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				SoundEffect.buttonSound();
@@ -34,15 +35,14 @@ public class GamePlayPage extends JPanel{
 		footer.add(playAgainBt);
 		
 		tryAgainBt = new JButton("Try Again");
-		tryAgainBt.setIcon(null);
+		tryAgainBt.setIcon(resetIcon);
 		tryAgainBt.setVisible(false);
-		tryAgainBt.setPreferredSize(new Dimension(100,40));
+		tryAgainBt.setPreferredSize(new Dimension(125,40));
 		tryAgainBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				SoundEffect.buttonSound();
 				setVisible(false);
 				removeAll();
-				board.winningFrame.dispose();
 				TicTacToe.frame.setSize(330,394);
 				TicTacToe.main.setVisible(true);
 				TicTacToe.frame.repaint();
