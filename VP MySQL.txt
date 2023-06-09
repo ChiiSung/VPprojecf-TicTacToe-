@@ -5,8 +5,6 @@ USE TicTacToe;
 CREATE TABLE player(
     player_id INT NOT NULL,
     player_username VARCHAR(255) NOT NULL,
-    player_win_count INT NOT NULL,
-    player_lose_count INT NOT NULL,
     player_play_time TIME NOT NULL,
     PRIMARY KEY (player_id)
 );
@@ -47,9 +45,12 @@ CREATE TABLE player_match(
     match_id INT NOT NULL AUTO_INCREMENT,
     board_id INT NOT NULL,
     player_id INT NOT NULL,
+    difficulty_id INT NOT NULL,
     match_win_count INT NOT NULL,
     match_lose_count INT NOT NULL,
     PRIMARY KEY (match_id),
     FOREIGN KEY (player_id) REFERENCES player(player_id),
-    FOREIGN KEY (board_id) REFERENCES board(board_id)
+    FOREIGN KEY (board_id) REFERENCES board(board_id),
+    FOREIGN KEY (difficulty_id) REFERENCES 
+    difficulty(difficulty_id)
 );

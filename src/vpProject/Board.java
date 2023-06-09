@@ -95,7 +95,9 @@ public class Board extends JPanel{
 			GamePlayPage.stateBoard.numAiWin();
 			GamePlayPage.tryAgainBt.setVisible(true);
 		}
-		GamePlayPage.stateBoard.updateDB();
+		if(TicTacToe.gamemode == 0) {
+			GamePlayPage.stateBoard.updateDB();
+		}
 	}
 	
 	public void draw() {

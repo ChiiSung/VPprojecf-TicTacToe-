@@ -112,6 +112,11 @@ public class StateBoard extends JPanel implements ActionListener{
 		botLb.setVisible(TicTacToe.playerCounter);
 		botLb.setText(String.valueOf(botPlayer));
 
+		if(TicTacToe.gamemode == 1) {
+			playerLb.setVisible(false);
+			botLb.setVisible(false);
+		}
+		
 		boardPl.add(timerLb);
 		boardPl.add(boardLb);
 		boardPl.add(playerLb);
@@ -148,7 +153,7 @@ public class StateBoard extends JPanel implements ActionListener{
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoe","root","");
 		
 				String sql = "SELECT * FROM player_match "
-						+ "WHERE player_id =" + TicTacToe.playerId + " AND board_id = " + TicTacToe.board + ";";
+						+ "WHERE player_id =" + TicTacToe.playerId + " AND board_id = " + TicTacToe.board + " AND difficulty_id = " + TicTacToe.difficulty + ";";
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(sql);
 				if(!rs.next()) {
@@ -157,8 +162,8 @@ public class StateBoard extends JPanel implements ActionListener{
 					botPlayer = 0;
 				}else {
 					match = rs.getInt(1);
-					player = rs.getInt(4);
-					botPlayer = rs.getInt(5);
+					player = rs.getInt(5);
+					botPlayer = rs.getInt(6);
 				}
 				
 				rs.close();
@@ -180,18 +185,27 @@ public class StateBoard extends JPanel implements ActionListener{
 					+  match
 					+ "," + TicTacToe.board 
 					+ "," + TicTacToe.playerId
-					+ "," + player
+					+ "," + TicTacToe.difficulty
+					+ "," + player	
 					+ "," + botPlayer + ");";
 			}else {
 				sql = "UPDATE player_match SET "
 						+ "board_id = "+ TicTacToe.board 
 						+ ", player_id = "+ TicTacToe.playerId
+						+ ", difficulty_id = "+ TicTacToe.difficulty
 						+ ", match_win_count = "+ player
 						+ ", match_lose_count = " + botPlayer 
 						+ " WHERE match_id = "+ match+ ";";
 			}
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate(sql);
+			
+			//update for player play's time
+			sql = "UPDATE player SET player_play_time = TIMESTAMPADD(SECOND," 
+					+ timer + ", player.player_play_time) "
+					+ "WHERE player_id = " + TicTacToe.playerId + ";";
+			stmt.executeUpdate(sql);
+			
 			
 			stmt.close();
 			con.close();
