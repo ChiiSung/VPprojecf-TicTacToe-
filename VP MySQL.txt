@@ -3,7 +3,7 @@ USE TicTacToe;
 
 -- Create table for Player
 CREATE TABLE player(
-    player_id INT NOT NULL,
+    player_id INT NOT NULL AUTO-INCREMENT,
     player_username VARCHAR(255) NOT NULL,
     player_play_time TIME NOT NULL,
     PRIMARY KEY (player_id)

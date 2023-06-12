@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2023 at 11:38 PM
+-- Generation Time: Jun 12, 2023 at 08:24 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `tictactoe`
 --
-CREATE DATABASE IF NOT EXISTS `tictactoe` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `tictactoe`;
 
 -- --------------------------------------------------------
 
@@ -29,12 +27,10 @@ USE `tictactoe`;
 -- Table structure for table `board`
 --
 
-DROP TABLE IF EXISTS `board`;
-CREATE TABLE IF NOT EXISTS `board` (
+CREATE TABLE `board` (
   `board_id` int(11) NOT NULL,
   `board_size` int(11) NOT NULL,
-  `board_size_name` varchar(255) NOT NULL,
-  PRIMARY KEY (`board_id`)
+  `board_size_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -52,11 +48,9 @@ INSERT INTO `board` (`board_id`, `board_size`, `board_size_name`) VALUES
 -- Table structure for table `difficulty`
 --
 
-DROP TABLE IF EXISTS `difficulty`;
-CREATE TABLE IF NOT EXISTS `difficulty` (
+CREATE TABLE `difficulty` (
   `difficulty_id` int(11) NOT NULL,
-  `difficult_mode` varchar(255) NOT NULL,
-  PRIMARY KEY (`difficulty_id`)
+  `difficult_mode` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -70,25 +64,40 @@ INSERT INTO `difficulty` (`difficulty_id`, `difficult_mode`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `lastplayer`
+--
+
+CREATE TABLE `lastplayer` (
+  `lastRecord` int(11) NOT NULL,
+  `player_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `lastplayer`
+--
+
+INSERT INTO `lastplayer` (`lastRecord`, `player_id`) VALUES
+(1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `player`
 --
 
-DROP TABLE IF EXISTS `player`;
-CREATE TABLE IF NOT EXISTS `player` (
+CREATE TABLE `player` (
   `player_id` int(11) NOT NULL,
   `player_username` varchar(255) NOT NULL,
-  `player_win_count` int(11) NOT NULL,
-  `player_lose_count` int(11) NOT NULL,
-  `player_play_time` time NOT NULL,
-  PRIMARY KEY (`player_id`)
+  `player_play_time` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `player`
 --
 
-INSERT INTO `player` (`player_id`, `player_username`, `player_win_count`, `player_lose_count`, `player_play_time`) VALUES
-(1, 'Sun', 0, 0, '00:00:00');
+INSERT INTO `player` (`player_id`, `player_username`, `player_play_time`) VALUES
+(1, 'Sun', '00:05:07'),
+(2, 'See', '00:00:00');
 
 -- --------------------------------------------------------
 
@@ -96,17 +105,24 @@ INSERT INTO `player` (`player_id`, `player_username`, `player_win_count`, `playe
 -- Table structure for table `player_match`
 --
 
-DROP TABLE IF EXISTS `player_match`;
-CREATE TABLE IF NOT EXISTS `player_match` (
-  `match_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `player_match` (
+  `match_id` int(11) NOT NULL,
   `board_id` int(11) NOT NULL,
   `player_id` int(11) NOT NULL,
+  `difficulty_id` int(11) NOT NULL,
   `match_win_count` int(11) NOT NULL,
-  `match_lose_count` int(11) NOT NULL,
-  PRIMARY KEY (`match_id`),
-  KEY `player_id` (`player_id`),
-  KEY `board_id` (`board_id`)
+  `match_lose_count` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `player_match`
+--
+
+INSERT INTO `player_match` (`match_id`, `board_id`, `player_id`, `difficulty_id`, `match_win_count`, `match_lose_count`) VALUES
+(1, 0, 1, 0, 29, 3),
+(2, 0, 1, 1, 1, 0),
+(3, 1, 1, 1, 1, 0),
+(4, 1, 1, 0, 7, 0);
 
 -- --------------------------------------------------------
 
@@ -114,9 +130,8 @@ CREATE TABLE IF NOT EXISTS `player_match` (
 -- Table structure for table `setting`
 --
 
-DROP TABLE IF EXISTS `setting`;
-CREATE TABLE IF NOT EXISTS `setting` (
-  `setting_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `setting` (
+  `setting_id` int(11) NOT NULL,
   `player_id` int(11) NOT NULL,
   `board_id` int(11) NOT NULL,
   `difficulty_id` int(11) NOT NULL,
@@ -124,19 +139,78 @@ CREATE TABLE IF NOT EXISTS `setting` (
   `setting_show_board_info` tinyint(1) NOT NULL,
   `setting_show_player_win_count` tinyint(1) NOT NULL,
   `gamemode` int(1) NOT NULL,
-  `setting_background_music` tinyint(1) NOT NULL,
-  PRIMARY KEY (`setting_id`),
-  KEY `player_id` (`player_id`),
-  KEY `board_id` (`board_id`),
-  KEY `difficulty_id` (`difficulty_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `setting_background_music` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `setting`
 --
 
 INSERT INTO `setting` (`setting_id`, `player_id`, `board_id`, `difficulty_id`, `setting_show_timer`, `setting_show_board_info`, `setting_show_player_win_count`, `gamemode`, `setting_background_music`) VALUES
-(1, 1, 0, 0, 1, 1, 1, 0, 0);
+(1, 1, 1, 0, 1, 1, 1, 0, 0),
+(3, 2, 0, 0, 1, 0, 1, 0, 0);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `board`
+--
+ALTER TABLE `board`
+  ADD PRIMARY KEY (`board_id`);
+
+--
+-- Indexes for table `difficulty`
+--
+ALTER TABLE `difficulty`
+  ADD PRIMARY KEY (`difficulty_id`);
+
+--
+-- Indexes for table `lastplayer`
+--
+ALTER TABLE `lastplayer`
+  ADD PRIMARY KEY (`lastRecord`);
+
+--
+-- Indexes for table `player`
+--
+ALTER TABLE `player`
+  ADD PRIMARY KEY (`player_id`);
+
+--
+-- Indexes for table `player_match`
+--
+ALTER TABLE `player_match`
+  ADD PRIMARY KEY (`match_id`),
+  ADD KEY `player_id` (`player_id`),
+  ADD KEY `board_id` (`board_id`),
+  ADD KEY `difficulty_id` (`difficulty_id`);
+
+--
+-- Indexes for table `setting`
+--
+ALTER TABLE `setting`
+  ADD PRIMARY KEY (`setting_id`),
+  ADD KEY `player_id` (`player_id`),
+  ADD KEY `board_id` (`board_id`),
+  ADD KEY `difficulty_id` (`difficulty_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `player_match`
+--
+ALTER TABLE `player_match`
+  MODIFY `match_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `setting`
+--
+ALTER TABLE `setting`
+  MODIFY `setting_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -147,7 +221,8 @@ INSERT INTO `setting` (`setting_id`, `player_id`, `board_id`, `difficulty_id`, `
 --
 ALTER TABLE `player_match`
   ADD CONSTRAINT `player_match_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `player` (`player_id`),
-  ADD CONSTRAINT `player_match_ibfk_2` FOREIGN KEY (`board_id`) REFERENCES `board` (`board_id`);
+  ADD CONSTRAINT `player_match_ibfk_2` FOREIGN KEY (`board_id`) REFERENCES `board` (`board_id`),
+  ADD CONSTRAINT `player_match_ibfk_3` FOREIGN KEY (`difficulty_id`) REFERENCES `difficulty` (`difficulty_id`);
 
 --
 -- Constraints for table `setting`
