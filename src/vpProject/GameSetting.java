@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.*;
@@ -270,21 +271,39 @@ public class GameSetting extends JPanel{
 	public void updateDB() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoe","root","");
-	
-		String sql = "UPDATE setting "
-				+ "SET setting.board_id = '"+ TicTacToe.board +"', "
-				+ "setting.difficulty_id = '"+ TicTacToe.difficulty +"', "
-				+ "setting_show_timer = '"+ (TicTacToe.matchTimer? 1:0) +"',"
-				+ "setting_show_board_info = '"+ (TicTacToe.boardInfo? 1:0) +"', "
-				+ "setting_show_player_win_count = '"+ (TicTacToe.playerCounter? 1:0) +"', "
-				+ "gamemode = '"+ TicTacToe.gamemode +"',"
-				+ "setting_background_music = '"+ (TicTacToe.backgroundMusic? 1:0) + "'"
-				+ "WHERE setting.player_id = '"+ TicTacToe.playerId +"';";
 		Statement stmt = con.createStatement();
-		stmt.executeUpdate(sql);
+		
+		String findsetting = "SELECT * FROM setting WHERE player_id = " + TicTacToe.playerId;
+		ResultSet rs = stmt.executeQuery(findsetting);
+		String sql;
+		if (rs.next() == false) {
+			sql = "INSERT INTO setting VALUES("
+					+"0"
+					+"," + TicTacToe.playerId 
+					+"," + TicTacToe.board 
+					+"," + TicTacToe.difficulty 
+					+"," + (TicTacToe.matchTimer? 1:0) 
+					+"," + (TicTacToe.boardInfo? 1:0) 
+					+"," + (TicTacToe.playerCounter? 1:0) 
+					+"," + TicTacToe.gamemode 
+					+"," + (TicTacToe.backgroundMusic? 1:0) + ");";
+			stmt.executeUpdate(sql);
+		}else {
+			sql = "UPDATE setting "
+					+ "SET setting.board_id = '"+ TicTacToe.board +"', "
+					+ "setting.difficulty_id = '"+ TicTacToe.difficulty +"', "
+					+ "setting_show_timer = '"+ (TicTacToe.matchTimer? 1:0) +"',"
+					+ "setting_show_board_info = '"+ (TicTacToe.boardInfo? 1:0) +"', "
+					+ "setting_show_player_win_count = '"+ (TicTacToe.playerCounter? 1:0) +"', "
+					+ "gamemode = '"+ TicTacToe.gamemode +"',"
+					+ "setting_background_music = '"+ (TicTacToe.backgroundMusic? 1:0) + "'"
+					+ "WHERE setting.player_id = '"+ TicTacToe.playerId +"';";
+			stmt.executeUpdate(sql);
+		}
 		
 		stmt.close();
-		con.close();;
+		con.close();
+		rs.close();
 	}
 	
 }

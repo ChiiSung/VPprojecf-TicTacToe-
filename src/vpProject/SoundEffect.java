@@ -6,11 +6,14 @@ import java.io.IOException;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class SoundEffect extends Thread{
 	static Clip clip = null;
+	static Clip clip2 = null;
 	
     public static void buttonSound() {
     	final String pathToClip = "bgm/buttonSound.wav";
@@ -36,6 +39,12 @@ public class SoundEffect extends Thread{
 	    if(soundLoaded) {
 	    	clip.start();
 		}
+	    clip.addLineListener(new LineListener() {
+	        public void update(LineEvent myLineEvent) {
+	          if (myLineEvent.getType() == LineEvent.Type.STOP)
+	            clip.close();
+	        }
+	     });
     }
     
     public static void winSound() {
@@ -46,8 +55,8 @@ public class SoundEffect extends Thread{
 	       File file1 = new File(pathToClip);
 	       AudioInputStream audioIn = AudioSystem.getAudioInputStream(file1);
 	       
-	       clip = AudioSystem.getClip();
-	       clip.open(audioIn);
+	       clip2 = AudioSystem.getClip();
+	       clip2.open(audioIn);
 	       soundLoaded = true;
 	    }catch (UnsupportedAudioFileException e) {
 	       soundLoaded = false; 
@@ -60,12 +69,26 @@ public class SoundEffect extends Thread{
 	       e.printStackTrace();
 	    }
 	    if(soundLoaded) {
-	    	clip.start();
+	    	TicTacToe.bgm.pauseBgm();
+	    	clip2.start();
 		}
+	    clip2.addLineListener(new LineListener() {
+	        public void update(LineEvent myLineEvent) {
+	          if (myLineEvent.getType() == LineEvent.Type.STOP)
+	            clip2.close();
+	        }
+	     });
     }
 	
     public static void stopBgm() {
-    	clip.stop();
+    	if(TicTacToe.backgroundMusic)
+    		TicTacToe.bgm.resumeBgm();
+    	clip2.stop();
+    }
+    
+    public static void startBgm() {
+    	TicTacToe.bgm.pauseBgm();
+    	clip2.start();
     }
 
 }
