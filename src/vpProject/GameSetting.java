@@ -13,6 +13,7 @@ import swing.*;
 public class GameSetting extends JPanel{
 	JPanel generalPl, matchInfoPl, gamemodePl, boardPl, difficultyPl, matchTimerPl, boardInfoPl, playerCounterPl, backgroundMusicPl;
 	JLabel settingLb, generalLb, matchInfoLb, gamemodeLb, boardLb, difficultyLb, matchTimerLb, boardInfoLb, playerCounterLb, backgroundLb, matchTimerDesc, boardInfoDesc, playerCounterDesc;
+	JLabel bgmInfoDesc, matchTimerOF, boardInfoOF, playerCounterOF, bgmInfoOF;
 	JComboBox gamemodeCb, boardCb, difficultyCb;
 	JScrollPane settingSp;
 	SwitchButton matchTimerSb, boardInfoSb, playerCounterSb, backgroundMusicSb;
@@ -160,10 +161,24 @@ public class GameSetting extends JPanel{
 		matchTimerDesc.setBounds(40, 27, 200, 46);
 		matchTimerPl.add(matchTimerDesc);
 		
+		matchTimerOF = new JLabel();
+		matchTimerOF.setText((TicTacToe.matchTimer? "On":"Off"));
+		matchTimerOF.setBounds(370, 21, 50, 21);
+		matchTimerPl.add(matchTimerOF);
+		
 		matchTimerSb = new SwitchButton();
 		matchTimerSb.setBounds(310, 21, 50, 21);
 		matchTimerSb.setSelected(TicTacToe.matchTimer);
 		matchTimerPl.add(matchTimerSb);
+		matchTimerSb.addEventSelected(new EventSwitchSelected() {
+            public void onSelected(boolean selected) {
+                if(selected) {
+                	matchTimerOF.setText("On");
+                }else {
+                	matchTimerOF.setText("Off");
+                }
+            }
+        });
 		
 		//boardInfoPl, boardInfoLb, boardInfoSb
 		boardInfoPl = new JPanel();
@@ -182,10 +197,24 @@ public class GameSetting extends JPanel{
 		boardInfoDesc.setBounds(40, 27, 200, 46);
 		boardInfoPl.add(boardInfoDesc);
 		
+		boardInfoOF = new JLabel();
+		boardInfoOF.setText((TicTacToe.boardInfo? "On":"Off"));
+		boardInfoOF.setBounds(370, 21, 50, 21);
+		boardInfoPl.add(boardInfoOF);
+		
 		boardInfoSb = new SwitchButton();
 		boardInfoSb.setBounds(310, 23, 50, 21);
 		boardInfoSb.setSelected(TicTacToe.boardInfo);
 		boardInfoPl.add(boardInfoSb);
+		boardInfoSb.addEventSelected(new EventSwitchSelected() {
+            public void onSelected(boolean selected) {
+                if(selected) {
+                	boardInfoOF.setText("On");
+                }else {
+                	boardInfoOF.setText("Off");
+                }
+            }
+        });
 
 		//playerCounterPl, playerCounterLb, playerCounterSb
 		playerCounterPl = new JPanel();
@@ -204,11 +233,24 @@ public class GameSetting extends JPanel{
 		playerCounterDesc.setBounds(40, 27, 200, 46);
 		playerCounterPl.add(playerCounterDesc);
 		
+		playerCounterOF = new JLabel();
+		playerCounterOF.setText((TicTacToe.playerCounter? "On":"Off"));
+		playerCounterOF.setBounds(370, 21, 50, 21);
+		playerCounterPl.add(playerCounterOF);
 		
 		playerCounterSb = new SwitchButton();
 		playerCounterSb.setBounds(310, 21, 50, 21);
 		playerCounterSb.setSelected(TicTacToe.playerCounter);
 		playerCounterPl.add(playerCounterSb);
+		playerCounterSb.addEventSelected(new EventSwitchSelected() {
+            public void onSelected(boolean selected) {
+                if(selected) {
+                	playerCounterOF.setText("On");
+                }else {
+                	playerCounterOF.setText("Off");
+                }
+            }
+        });
 		
 		JPanel backgroundPl = new JPanel();
 		backgroundPl.setLayout(null);
@@ -221,6 +263,16 @@ public class GameSetting extends JPanel{
 		backgroundLb.setBounds(10, 10, 163, 46);
 		backgroundPl.add(backgroundLb);
 		
+		bgmInfoDesc = new JLabel("Switch on/off background music");
+		bgmInfoDesc.setFont(new Font("Times New Romen", Font.PLAIN, 11));
+		bgmInfoDesc.setBounds(40, 27, 200, 46);
+		backgroundPl.add(bgmInfoDesc);
+		
+		bgmInfoOF = new JLabel();
+		bgmInfoOF.setText((TicTacToe.backgroundMusic? "On":"Off"));
+		bgmInfoOF.setBounds(370, 21, 50, 21);
+		backgroundPl.add(bgmInfoOF);
+		
 		backgroundMusicSb = new SwitchButton();
 		backgroundMusicSb.setBounds(310, 21, 50, 21);
 		backgroundMusicSb.setSelected(TicTacToe.backgroundMusic);
@@ -228,8 +280,10 @@ public class GameSetting extends JPanel{
             public void onSelected(boolean selected) {
                 if(selected) {
                 	TicTacToe.bgm.resumeBgm();
+                	bgmInfoOF.setText("On");
                 }else {
                 	TicTacToe.bgm.pauseBgm();
+                	bgmInfoOF.setText("Off");
                 }
             }
         });
