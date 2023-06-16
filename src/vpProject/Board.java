@@ -11,7 +11,7 @@ public class Board extends JPanel{
 	ImageIcon winnerIcon;
 	Boolean player1 = true, win = false;
 	int lenght, boardnumber = numberOfBoard*numberOfBoard;
-	static winning_frame  winningFrame;
+	static Winning_frame  winningFrame;
 	
 	Board() {
 		lenght = TicTacToe.frame.getWidth()/numberOfBoard;
@@ -90,7 +90,7 @@ public class Board extends JPanel{
 		if(winnerIcon == XIcon) {
 			GamePlayPage.stateBoard.numPlWin();
 			GamePlayPage.playAgainBt.setVisible(true);
-			winningFrame = new winning_frame();
+			winningFrame = new Winning_frame();
 		}else {
 			GamePlayPage.stateBoard.numAiWin();
 			GamePlayPage.tryAgainBt.setVisible(true);
@@ -539,7 +539,7 @@ public class Board extends JPanel{
 		}
 	}
 	
-	public boolean calWin(ImageIcon Icon, Color color) {
+	public void calWin(ImageIcon Icon, Color color) {
 		int rowCount = 0;
 		int colunmCount = 0;
 		int xCount = 0; 
@@ -605,7 +605,6 @@ public class Board extends JPanel{
 			winnerIcon = Icon;
 			whenWin();
 		}
-		return win;
 	}
 	
 	public void whenWin() {

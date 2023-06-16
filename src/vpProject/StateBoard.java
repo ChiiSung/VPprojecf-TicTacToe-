@@ -145,6 +145,24 @@ public class StateBoard extends JPanel implements ActionListener{
 	
 	public void stopTimer() {
 		t.stop();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tictactoe","root","");
+			String sql = null;
+			Statement stmt = con.createStatement();
+			
+			//update for player play's time
+			sql = "UPDATE player SET player_play_time = TIMESTAMPADD(SECOND," 
+					+ timer + ", player.player_play_time) "
+					+ "WHERE player_id = " + TicTacToe.playerId + ";";
+			stmt.executeUpdate(sql);
+			
+			
+			stmt.close();
+			con.close();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void readDB() {
@@ -199,13 +217,6 @@ public class StateBoard extends JPanel implements ActionListener{
 			}
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate(sql);
-			
-			//update for player play's time
-			sql = "UPDATE player SET player_play_time = TIMESTAMPADD(SECOND," 
-					+ timer + ", player.player_play_time) "
-					+ "WHERE player_id = " + TicTacToe.playerId + ";";
-			stmt.executeUpdate(sql);
-			
 			
 			stmt.close();
 			con.close();

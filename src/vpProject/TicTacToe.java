@@ -185,12 +185,12 @@ public class TicTacToe{
 		
 		JLabel gameplaytimeLp = new JLabel("Game Play Time");
 		gameplaytimeLp.setHorizontalAlignment(SwingConstants.CENTER);
-		gameplaytimeLp.setBounds(155, 35, 110, 13);
+		gameplaytimeLp.setBounds(155, 45, 110, 13);
 		playerPl.add(gameplaytimeLp);
 		
 		JLabel PlayerNameLb = new JLabel("Player's Name");
 		PlayerNameLb.setHorizontalAlignment(SwingConstants.CENTER);
-		PlayerNameLb.setBounds(20, 35, 90, 13);
+		PlayerNameLb.setBounds(20, 45, 90, 13);
 		playerPl.add(PlayerNameLb);
 		
 		JButton returnBt = new JButton();
@@ -207,13 +207,13 @@ public class TicTacToe{
 		});
 		
 		JPanel playerPl1 = new JPanel();
-		playerPl1.setBounds(10, 53, 276, 68);
+		playerPl1.setBounds(10, 63, 276, 68);
 		playerPl.add(playerPl1);
 		playerPl1.setLayout(null);
 		player(playerPl1,0);
 		
 		JPanel playerPl2 = new JPanel();
-		playerPl2.setBounds(10, 155, 276, 68);
+		playerPl2.setBounds(10, 160, 276, 68);
 		playerPl.add(playerPl2);
 		playerPl2.setLayout(null);
 		player(playerPl2,1);

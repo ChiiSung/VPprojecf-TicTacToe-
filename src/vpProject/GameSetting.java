@@ -114,7 +114,7 @@ public class GameSetting extends JPanel{
 		boardLb.setBounds(10, 10, 163, 46);
 		boardPl.add(boardLb);
 		
-		String sizeS[] = {"Default(3x3)", "4x4", "5x5"};
+		String sizeS[] = {"Default(3x3)", "4x4", "5x5","6X6"};
 		boardCb = new JComboBox(sizeS);
 		boardCb.setSelectedIndex(TicTacToe.board);
 		boardCb.setBounds(260, 23, 124, 21);
