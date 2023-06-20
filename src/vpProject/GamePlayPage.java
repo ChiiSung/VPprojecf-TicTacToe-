@@ -17,6 +17,7 @@ public class GamePlayPage extends JPanel{
 		footer = new JPanel();
 		
 		playAgainBt = new JButton("Play Again");
+		playAgainBt.setFont(new Font("TimesRoman", Font.BOLD, 12));
 		playAgainBt.setIcon(resetIcon);
 		playAgainBt.setVisible(false);
 		playAgainBt.setPreferredSize(new Dimension(125,40));
@@ -35,6 +36,7 @@ public class GamePlayPage extends JPanel{
 		footer.add(playAgainBt);
 		
 		tryAgainBt = new JButton("Try Again");
+		tryAgainBt.setFont(new Font("TimesRoman", Font.BOLD, 12));
 		tryAgainBt.setIcon(resetIcon);
 		tryAgainBt.setVisible(false);
 		tryAgainBt.setPreferredSize(new Dimension(125,40));
@@ -52,6 +54,7 @@ public class GamePlayPage extends JPanel{
 		footer.add(tryAgainBt);
 		
 		exitBt = new JButton("Exit");
+		exitBt.setFont(new Font("TimesRoman", Font.BOLD, 12));
 		exitBt.setIcon(null);
 		exitBt.setPreferredSize(new Dimension(100,40));
 		exitBt.addActionListener(new ActionListener() {

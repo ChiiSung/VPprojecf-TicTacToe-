@@ -259,7 +259,7 @@ public class TicTacToe{
 			player.add(playtime1Lb);
 			
 			JButton delete = new JButton();
-			delete.setBounds(246, 25, 20, 20);
+			delete.setBounds(246, 25, 25, 25);
 			delete.setIcon(deleteIcon);
 			delete.setActionCommand(String.valueOf(x));
 			delete.addActionListener(new ActionListener() {
@@ -320,6 +320,20 @@ public class TicTacToe{
 							String sql = "INSERT INTO player VALUES(+" + (x+1) + ",'" + userNewName + "'," + "0" + ")";
 							Statement stmt = con.createStatement();
 							stmt.executeUpdate(sql);
+							
+							sql = "INSERT INTO setting VALUES("
+									+"0"
+									+"," + (x+1)
+									+"," + 0 
+									+"," + 0
+									+"," + 1
+									+"," + 1
+									+"," + 1
+									+"," + 0
+									+"," + 1 + ");";
+							stmt.executeUpdate(sql);
+							bgm.resumeBgm();
+							
 							playerId = x+1;
 							readPlayer();
 							updatePlayer();
@@ -378,7 +392,7 @@ public class TicTacToe{
 }
 
 class BGM extends Thread{
-	private final String pathToClip = "bgm/星间旅行.wav";
+	private final String pathToClip = "bgm/Sukidakara (Piano Version).wav";
     private boolean soundLoaded;
     private Clip clip;
     
@@ -390,7 +404,6 @@ class BGM extends Thread{
 	       
 	       clip = AudioSystem.getClip();
 	       clip.open(audioIn);
-	       clip.loop(Clip.LOOP_CONTINUOUSLY);
 	       soundLoaded = true;
 	    }catch (UnsupportedAudioFileException e) {
 	       soundLoaded = false; 
@@ -404,6 +417,7 @@ class BGM extends Thread{
 	    }
 	    if(TicTacToe.backgroundMusic) {
 			clip.start();
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
 		}else {
 			clip.stop();
 		}
@@ -415,5 +429,6 @@ class BGM extends Thread{
     
     public void resumeBgm() {
     	clip.start();
+    	clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 }

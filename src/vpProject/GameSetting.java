@@ -34,7 +34,7 @@ public class GameSetting extends JPanel{
 		settingLb = new JLabel("Settings");
 		settingLb.setFont(new Font("TimesRoman", Font.BOLD, 36));
 		settingLb.setHorizontalAlignment(SwingConstants.CENTER);
-		settingLb.setBounds(135, 10, 150, 44);
+		settingLb.setBounds(135, 10, 150, 40);
 		
 		setGeneral();
 		
@@ -80,7 +80,7 @@ public class GameSetting extends JPanel{
 		generalPl.setPreferredSize(new Dimension(450,650));
 		
 		generalLb = new JLabel("General");
-		generalLb.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		generalLb.setFont(new Font("TimesRoman", Font.BOLD, 18));
 		generalLb.setBounds(10, 53, 94, 20);
 		generalPl.add(generalLb);
 		
@@ -92,6 +92,7 @@ public class GameSetting extends JPanel{
 		
 		String gamemodeS[] = {"Singleplayer", "Multiplayer"};
 		gamemodeCb = new JComboBox(gamemodeS);
+		gamemodeCb.setFont(new Font("TimesRoman", Font.PLAIN, 16));
 		gamemodeCb.setSelectedIndex(TicTacToe.gamemode);
 		gamemodeCb.setBounds(260, 24, 124, 21);
 		gamemodePl.add(gamemodeCb);
@@ -99,6 +100,7 @@ public class GameSetting extends JPanel{
 		gamemodeLb = new JLabel();
 		gamemodeLb.setIcon(gameplayIcon);
 		gamemodeLb.setText("Gamemode");
+		gamemodeLb.setFont(new Font("TimesRoman", Font.PLAIN, 16));
 		gamemodeLb.setBounds(10, 10, 163, 46);
 		gamemodePl.add(gamemodeLb);
 		
@@ -111,11 +113,13 @@ public class GameSetting extends JPanel{
 		boardLb = new JLabel();
 		boardLb.setIcon(boardIcon);
 		boardLb.setText("Board");
+		boardLb.setFont(new Font("TimesRoman", Font.PLAIN, 16));
 		boardLb.setBounds(10, 10, 163, 46);
 		boardPl.add(boardLb);
 		
 		String sizeS[] = {"Default(3x3)", "4x4", "5x5","6X6"};
 		boardCb = new JComboBox(sizeS);
+		boardCb.setFont(new Font("TimesRoman", Font.PLAIN, 16));
 		boardCb.setSelectedIndex(TicTacToe.board);
 		boardCb.setBounds(260, 23, 124, 21);
 		boardPl.add(boardCb);
@@ -129,18 +133,20 @@ public class GameSetting extends JPanel{
 		difficultyLb = new JLabel();
 		difficultyLb.setIcon(difficultyIcon);
 		difficultyLb.setText("Difficulty");
+		difficultyLb.setFont(new Font("TimesRoman", Font.PLAIN, 16));
 		difficultyLb.setBounds(10, 10, 163, 46);
 		difficultyPl.add(difficultyLb);
 		
 		String difficultyS[]= {"Easy", "Hard"};
 		difficultyCb = new JComboBox(difficultyS);
+		difficultyCb.setFont(new Font("TimesRoman", Font.PLAIN, 16));
 		difficultyCb.setSelectedIndex(TicTacToe.difficulty);
 		difficultyCb.setBounds(260, 23, 124, 21);
 		difficultyPl.add(difficultyCb);
 		
 		//match info
 		matchInfoLb = new JLabel("Match Info");
-		matchInfoLb.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		matchInfoLb.setFont(new Font("TimesRoman", Font.BOLD, 18));
 		matchInfoLb.setBounds(10, 307, 94, 30);
 		generalPl.add(matchInfoLb);
 		
@@ -152,17 +158,19 @@ public class GameSetting extends JPanel{
 		generalPl.add(matchTimerPl);
 		
 		matchTimerLb = new JLabel("Match Timer");
+		matchTimerLb.setFont(new Font("TimesRoman", Font.PLAIN, 16));
 		matchTimerLb.setIcon(timerIcon);
 		matchTimerLb.setBounds(10, 10, 163, 46);
 		matchTimerPl.add(matchTimerLb);
 		
 		matchTimerDesc = new JLabel("Keep Track of how long the match takes");
-		matchTimerDesc.setFont(new Font("Times New Romen", Font.PLAIN, 11));
-		matchTimerDesc.setBounds(40, 27, 200, 46);
+		matchTimerDesc.setFont(new Font("Times New Romen", Font.PLAIN, 12));
+		matchTimerDesc.setBounds(40, 27, 220, 46);
 		matchTimerPl.add(matchTimerDesc);
 		
 		matchTimerOF = new JLabel();
 		matchTimerOF.setText((TicTacToe.matchTimer? "On":"Off"));
+		matchTimerOF.setFont(new Font("TimesRoman", Font.PLAIN, 16));
 		matchTimerOF.setBounds(370, 21, 50, 21);
 		matchTimerPl.add(matchTimerOF);
 		
@@ -188,17 +196,19 @@ public class GameSetting extends JPanel{
 		generalPl.add(boardInfoPl);
 		
 		boardInfoLb = new JLabel("Board Info");
+		boardInfoLb.setFont(new Font("TimesRoman", Font.PLAIN, 16));
 		boardInfoLb.setIcon(boardIcon);
 		boardInfoLb.setBounds(10, 10, 163, 46);
 		boardInfoPl.add(boardInfoLb);
 		
 		boardInfoDesc = new JLabel("Displays number of spots taken");
-		boardInfoDesc.setFont(new Font("Times New Romen", Font.PLAIN, 11));
+		boardInfoDesc.setFont(new Font("Times New Romen", Font.PLAIN, 12));
 		boardInfoDesc.setBounds(40, 27, 200, 46);
 		boardInfoPl.add(boardInfoDesc);
 		
 		boardInfoOF = new JLabel();
 		boardInfoOF.setText((TicTacToe.boardInfo? "On":"Off"));
+		boardInfoOF.setFont(new Font("TimesRoman", Font.PLAIN, 16));
 		boardInfoOF.setBounds(370, 21, 50, 21);
 		boardInfoPl.add(boardInfoOF);
 		
@@ -224,17 +234,19 @@ public class GameSetting extends JPanel{
 		generalPl.add(playerCounterPl);
 		
 		playerCounterLb = new JLabel("Player Counter");
+		playerCounterLb.setFont(new Font("TimesRoman", Font.PLAIN, 16));
 		playerCounterLb.setIcon(playerIcon);
 		playerCounterLb.setBounds(10, 10, 163, 46);
 		playerCounterPl.add(playerCounterLb);
 		
 		playerCounterDesc = new JLabel("Display number of human/bots wins");
-		playerCounterDesc.setFont(new Font("Times New Romen", Font.PLAIN, 11));
+		playerCounterDesc.setFont(new Font("Times New Romen", Font.PLAIN, 12));
 		playerCounterDesc.setBounds(40, 27, 200, 46);
 		playerCounterPl.add(playerCounterDesc);
 		
 		playerCounterOF = new JLabel();
 		playerCounterOF.setText((TicTacToe.playerCounter? "On":"Off"));
+		playerCounterOF.setFont(new Font("TimesRoman", Font.PLAIN, 16));
 		playerCounterOF.setBounds(370, 21, 50, 21);
 		playerCounterPl.add(playerCounterOF);
 		
@@ -259,17 +271,19 @@ public class GameSetting extends JPanel{
 		generalPl.add(backgroundPl);
 		
 		backgroundLb = new JLabel("BGM");
+		backgroundLb.setFont(new Font("TimesRoman", Font.PLAIN, 16));
 		backgroundLb.setIcon(musicIcon);
 		backgroundLb.setBounds(10, 10, 163, 46);
 		backgroundPl.add(backgroundLb);
 		
 		bgmInfoDesc = new JLabel("Switch on/off background music");
-		bgmInfoDesc.setFont(new Font("Times New Romen", Font.PLAIN, 11));
+		bgmInfoDesc.setFont(new Font("Times New Romen", Font.PLAIN, 12));
 		bgmInfoDesc.setBounds(40, 27, 200, 46);
 		backgroundPl.add(bgmInfoDesc);
 		
 		bgmInfoOF = new JLabel();
 		bgmInfoOF.setText((TicTacToe.backgroundMusic? "On":"Off"));
+		bgmInfoOF.setFont(new Font("TimesRoman", Font.PLAIN, 16));
 		bgmInfoOF.setBounds(370, 21, 50, 21);
 		backgroundPl.add(bgmInfoOF);
 		
@@ -297,7 +311,7 @@ public class GameSetting extends JPanel{
 		settingSp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
 		JButton resetBt = new JButton("Reset to default");
-		resetBt.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		resetBt.setFont(new Font("TimesRoman", Font.BOLD, 16));
 		resetBt.setIcon(resetIcon);
 		resetBt.setBounds(135, 450, 170, 42);
 		resetBt.addActionListener(new ActionListener() {

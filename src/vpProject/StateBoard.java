@@ -54,7 +54,7 @@ public class StateBoard extends JPanel implements ActionListener{
 		switch(status) {
 		case 1:
 			if(TicTacToe.gamemode == 0) {
-				turnLb.setText("You Turn");
+				turnLb.setText("Your Turn");
 			}else if(TicTacToe.gamemode == 1) {
 				turnLb.setText("Player 1 Turn");
 			}
@@ -79,7 +79,7 @@ public class StateBoard extends JPanel implements ActionListener{
 			break;
 		case 5:
 			if(TicTacToe.gamemode == 0) {
-				turnLb.setText("You Lost!");
+				turnLb.setText("You Lose!");
 			}else if(TicTacToe.gamemode == 1) {
 				turnLb.setText("Player 2 Win");
 			}
